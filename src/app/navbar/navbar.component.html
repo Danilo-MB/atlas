@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/">Atlas Cortinas</a>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFE5CC">
+    <a class="navbar-brand" routerLink="/" style="font-weight: bold;">Atlas Cortinas</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,16 +16,26 @@
             </svg>
           </a>
         </li>
-        <li *ngIf="!(auth.user$ | async)" class="nav-item active">
+        <li *ngIf="!appUser" class="nav-item active">
             <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <li *ngIf="auth.user$ | async as user" class="nav-item active">
-            <a class="nav-link">Bienvenidx {{ user.displayName }}</a>
+        <li *ngIf="appUser" class="nav-item active">
+            <a class="nav-link">Bienvenido/a {{ appUser.name }}</a>
         </li>
+        <ng-container *ngIf="appUser && appUser.isAdmin">
+          <li class="nav-item active">
+              <a class="nav-link" routerLink="/admin/products">Admin: Productos</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" routerLink="/pedidos">Admin: Pedidos</a>
+          </li>
+        </ng-container>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <a *ngIf="auth.user$ | async"
-        (click)="logout()" class="nav-link" class="nav-item active" style="color:red">Cerrar Sesión</a>
+        <a *ngIf="appUser"
+        (click)="logout()" class="nav-link" class="nav-item active" style="cursor: pointer">Cerrar Sesión</a>
       </form>
     </div>
 </nav>
+
+

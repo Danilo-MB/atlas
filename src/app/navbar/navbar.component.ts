@@ -1,5 +1,6 @@
 import { AuthService } from './../auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AppUser } from '../models/app-user';
 
 
 @Component({
@@ -8,13 +9,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  
+  appUser: AppUser;
 
-  constructor(public auth: AuthService) {
+  constructor(private auth: AuthService) {
     
    }
 
   ngOnInit() {
+    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
   }
 
   ngOnDestroy(){
@@ -23,6 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout(){
     this.auth.logout();
+    this.appUser = null;
   }
 
 }
