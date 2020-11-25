@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './shopping-cart.service';
 import { ProductService } from './product.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { CategoryService } from './category.service';
@@ -27,6 +28,8 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthGuardService } from './auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { UserService } from './user.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { UserService } from './user.service';
     AdminOrdersComponent,
     AdminProductsComponent,
     FooterComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +74,7 @@ import { UserService } from './user.service';
     AuthGuardService, 
     AngularFireDatabaseModule,
     CategoryService,
+    ShoppingCartService,
     //AngularFirestoreModule //Prueba por bug solucionado
     UserService
   ],
