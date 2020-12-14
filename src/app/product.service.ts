@@ -31,6 +31,7 @@ export class ProductService {
   }
 
   update(productId, product){
+    //console.log(productId + " productId");
     return this.db.object('/products/' + productId).update(product);
   }
 

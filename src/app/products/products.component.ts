@@ -1,21 +1,26 @@
+import { ShoppingCartService } from './../shopping-cart.service';
 import { Product } from './../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../category.service';
 import { ProductService } from './../product.service';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
   products: Observable<Product[]>;
   filteredProducts: Observable<Product[]>;
   category: string;
+  cart: any;
+  subscription: Subscription;
+  cartId: string;
+  
 
-  constructor(productService: ProductService, route: ActivatedRoute) {
+  constructor(productService: ProductService, route: ActivatedRoute, private shoppingCartService: ShoppingCartService) {
     //productService.getAll().subscribe(products => this.products = products);
     this.products = productService.getAll();
     this.filteredProducts = this.products;
@@ -31,7 +36,16 @@ export class ProductsComponent {
       //   this.products.filter(p => p.category === this.category) :
       //   this.products;
     });
-   }
+  }
+
+  async ngOnInit() {
+    this.subscription = (await this.shoppingCartService.getCart()).snapshotChanges()
+      .subscribe(cart => this.cart = cart.payload.val());
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 
 
