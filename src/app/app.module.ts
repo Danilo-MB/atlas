@@ -76,7 +76,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     CategoryService,
     ShoppingCartService,
     //AngularFirestoreModule //Prueba por bug solucionado
-    UserService
+    UserService,
+    NavbarComponent
   ],
   bootstrap: [AppComponent]
 })
