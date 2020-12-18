@@ -14,8 +14,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let p of filteredProducts">
-            <th>{{ p.title }}</th>
-            <th>{{ p.price }}</th>
+            <td>{{ p.title }}</td>
+            <td>{{ p.price | currency:'USD':true }}</td>
             <th>
                 <a [routerLink]="['/admin/products/', p.key]" routerLinkActive="router-link-active">Edit</a>
             </th>

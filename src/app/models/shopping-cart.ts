@@ -12,10 +12,10 @@ export class ShoppingCart {
     }
 
     getQuantity(product: Product){
-        //console.log(product);
+        // console.log(product);
         let item = this.itemsMap[product.key];
         return item ? item.quantity : 0;
-      }
+    }
 
     get productIds(){
         return Object.keys(this.itemsMap);
