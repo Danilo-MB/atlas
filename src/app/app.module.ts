@@ -1,3 +1,5 @@
+import { SpinnerService } from './spinner.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderService } from './order.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductService } from './product.service';
@@ -13,7 +15,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+//import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -34,6 +36,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -53,13 +57,16 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
     ProductCardComponent,
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
-    ShippingFormComponent
+    ShippingFormComponent,
+    AdminOrderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
@@ -71,20 +78,23 @@ import { ShippingFormComponent } from './shipping-form/shipping-form.component';
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService] },
       { path: 'admin/products/:key', component: ProductFormComponent, canActivate: [AuthGuardService] },
       { path: 'admin/pedidos', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
+      { path: 'admin/pedido/:id', component: AdminOrderComponent, canActivate: [AuthGuardService] },
+
     ])
   ],
   providers: [
-    AngularFireAuth, 
+    AngularFireAuth,
     ProductService,
-    AuthService, 
+    AuthService,
     AdminAuthGuardService,
-    AuthGuardService, 
+    AuthGuardService,
     AngularFireDatabaseModule,
     CategoryService,
     ShoppingCartService,
     //AngularFirestoreModule //Prueba por bug solucionado
     UserService,
-    OrderService
+    OrderService,
+    SpinnerService
   ],
   bootstrap: [AppComponent]
 })

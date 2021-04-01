@@ -1,19 +1,23 @@
-<h1>Pedidos</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Cliente</th>
-      <th>Fecha</th>
-      <th></th>
-    </tr>
-  </thead> 
-  <tbody>
-    <tr *ngFor="let order of orders$ | async">
-      <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date}}</td>
-      <td>
-        <a href="#">Ver</a>
-      </td>
-    </tr>
-  </tbody> 
-</table>
+<body style="margin-top: 20px; margin-left: 20px; margin-left: 20px;">
+  <h1>Pedidos</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>ID</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders$ | async">
+        <td>{{ order.shipping.name }}</td>
+        <td>{{ order.datePlaced | date}}</td>
+        <td></td>
+        <td>
+          <a [routerLink]="['/admin/pedido/' , order.id]" routerLinkActive="router-link-active">Ver</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>

@@ -14,7 +14,8 @@ export class UserService {
   save(user: firebase.User){
     this.get(user.uid).update({
       name: user.displayName,
-      email: user.email
+      email: user.email,
+      image: user.photoURL
     });
   }
 

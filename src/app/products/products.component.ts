@@ -24,6 +24,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     //productService.getAll().subscribe(products => this.products = products);
     this.products = productService.getAll();
     this.filteredProducts = this.products;
+
+    if(!shoppingCartService){
+      this.products = productService.getAll();
+      this.filteredProducts = this.products; 
+    }
     
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');

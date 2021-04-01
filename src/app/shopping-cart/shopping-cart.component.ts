@@ -1,11 +1,15 @@
 import { NavbarComponent } from './../navbar/navbar.component';
 import { ShoppingCartService } from './../shopping-cart.service';
 import { Component, OnInit } from '@angular/core';
+import { fade } from '../animations/animations';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
+  animations: [
+    fade
+  ]
 })
 export class ShoppingCartComponent implements OnInit {
   cart$;
@@ -16,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cart$ = (await this.shoppingCartService.getCart());
   }
 
-  clearCart(){
+  clearCart() {
     this.shoppingCartService.clearCart();
   }
 

@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
    async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
     this.cart$ = (await this.shoppingCartService.getCart());
-
   }
 
   ngOnDestroy(){

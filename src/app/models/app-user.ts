@@ -3,5 +3,6 @@ export interface AppUser {
     email: string,
     isAdmin: boolean,
     category: string,
-    key: string
+    key: string,
+    image: string
 }

@@ -14,15 +14,15 @@ import { OrderService } from '../order.service';
 })
 export class ShippingFormComponent implements OnInit, OnDestroy {
   @Input('cart') cart: ShoppingCart;
-  shipping:any = {}; 
+  shipping: any = {};
   userId: string;
   userSubscription: Subscription;
 
   constructor(
-    private orderService: OrderService, 
+    private orderService: OrderService,
     private authService: AuthService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.userSubscription = this.authService.user$.subscribe(user => this.userId = user.uid);
@@ -34,10 +34,10 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
   }
 
   async placeOrder() {
-    let order = new Order(this.userId, this.shipping, this.cart);
+    let order = new Order(this.userId, this.shipping, this.cart, this.orderService);
     let result = await this.orderService.placeOrder(order);
     this.router.navigate(['/order-success', result.key]);
-  }    
+  }
 
 
 }
