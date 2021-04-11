@@ -1,26 +1,30 @@
-<body style="margin-top: 20px; margin-left: 20px; margin-left: 20px;">
+<body style="margin-top: 20px; margin-left: 20px; margin-left: 20px; padding: 0">
     <p>
         <a routerLink="/admin/products/new" class="btn btn-primary">Nuevo Producto</a>
     </p>
-    <p>
-        <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let p of filteredProducts">
-                <td>{{ p.title }}</td>
-                <td>{{ p.price | currency:'USD':true }}</td>
-                <th>
-                    <a [routerLink]="['/admin/products/', p.key]" routerLinkActive="router-link-active">Edit</a>
-                </th>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-4">
+            <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of filteredProducts">
+                    <td>{{ p.title }}</td>
+                    <td>{{ p.price | currency:'USD':true }}</td>
+                    <th>
+                        <a [routerLink]="['/admin/products/', p.key]" routerLinkActive="router-link-active">Edit</a>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>

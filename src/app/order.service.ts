@@ -13,7 +13,7 @@ export class OrderService {
   constructor(private db: AngularFireDatabase, private shoppingCartService: ShoppingCartService) { }
 
   getOrders() {
-    return this.db.list('/orders');
+    return this.db.list<any>('/orders');
   }
 
   getOrderByUser() {

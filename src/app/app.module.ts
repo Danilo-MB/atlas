@@ -1,4 +1,5 @@
-import { SpinnerService } from './spinner.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderService } from './order.service';
 import { ShoppingCartService } from './shopping-cart.service';
@@ -37,7 +38,6 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
-import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
     AdminOrderComponent,
-    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +66,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },
@@ -82,6 +82,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 
     ])
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     AngularFireAuth,
     ProductService,
@@ -94,7 +95,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     //AngularFirestoreModule //Prueba por bug solucionado
     UserService,
     OrderService,
-    SpinnerService
+    NgxSpinnerService
   ],
   bootstrap: [AppComponent]
 })

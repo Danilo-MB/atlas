@@ -30,25 +30,25 @@ export class ShoppingCartService {
 
   async getCart(): Promise<Observable<ShoppingCart>> {
     let cartId = await this.getOrCreateCartId();
- 
-    return  this.db.object("/shopping-carts/" + cartId).snapshotChanges()
-    .pipe(map((result:any) => {
-      let key = result.key;
-      let items = key ? result.payload.val().items : {};
-      return new ShoppingCart(items);
-    }));
+
+    return this.db.object("/shopping-carts/" + cartId).snapshotChanges()
+      .pipe(map((result: any) => {
+        let key = result.key;
+        let items = key ? result.payload.val().items : {};
+        return new ShoppingCart(items);
+      }));
   }
 
   private async getOrCreateCartId(): Promise<string> {
     this.cartId = localStorage.getItem('cartId');
-    if(!this.cartId){
+    if (!this.cartId) {
       let cart = await this.create();
       localStorage.setItem('cartId', cart.key);
       this.cartId = cart.key;
       return cart.key;
-    }else {
+    } else {
       return this.cartId;
-    }    
+    }
   }
 
   async addToCart(product: Product) {
@@ -56,26 +56,28 @@ export class ShoppingCartService {
     let item$ = this.db.object('/shopping-carts/' + this.cartId + '/items/' + product.key);
     const item = item$.valueChanges().take(1).subscribe(i => {
       if (i) {
-        item$.update({product: product, quantity: i['quantity'] + 1 })
+        item$.update({ product: product, quantity: i['quantity'] + 1 })
       } else {
-        item$.set({product: product, quantity: 1 })
+        item$.set({ product: product, quantity: 1 })
       }
     });
   }
 
-  async removeFromCart(product: Product){
+  async removeFromCart(product: Product) {
     await this.getOrCreateCartId();
     let item$ = this.db.object('/shopping-carts/' + this.cartId + '/items/' + product.key);
     const item = item$.valueChanges().take(1).subscribe(i => {
       if (i) {
-        item$.update({product: product, quantity: i['quantity'] - 1 })
-      } else {
-        item$.set({product: product, quantity: 1 })
+        if (i['quantity'] > 1) {
+          item$.update({ product: product, quantity: i['quantity'] - 1 })
+        } else {
+          this.db.object('/shopping-carts/' + this.cartId + '/items/' + product.key).remove();
+        }
       }
     });
   }
 
-  async clearCart(){
+  async clearCart() {
     let cartId = await this.getOrCreateCartId();
     this.db.object('/shopping-carts/' + cartId + '/items').remove();
   }

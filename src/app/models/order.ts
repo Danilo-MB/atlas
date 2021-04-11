@@ -9,7 +9,7 @@ export class Order {
   id: string;
   orders$;
 
-  constructor(public userId: string, public shipping: any, shoppingCart: ShoppingCart, public orderService: OrderService) {
+  constructor(public userId: string, public shipping: any, shoppingCart: ShoppingCart) {
 
     this.datePlaced = new Date().getTime();
 
