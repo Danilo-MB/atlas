@@ -15,7 +15,7 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink="/shopping-cart">
-          Mis Compras
+          Carrito
           <span *ngIf="cart$ | async as cart">
             <span class="badge badge-pill badge-success" *ngIf="cart.totalItemsCount > 0">
               {{ cart.totalItemsCount }}
@@ -41,6 +41,14 @@
         </li>
       </ng-container>
     </ul>
+
+    <form class="form-inline my-2 my-lg-0" style="margin-right: 15px;">
+      <ul class="navbar-nav mr-auto">
+        <li *ngIf="!appUser">
+          <a routerLink="/login" class="nav-link" class="nav-item active" style="cursor: pointer">Login</a>
+        </li>
+      </ul>
+    </form>
 
     <form class="form-inline my-2 my-lg-0" style="margin-right: 15px;">
       <ul class="navbar-nav mr-auto">

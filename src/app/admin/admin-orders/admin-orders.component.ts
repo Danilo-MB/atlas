@@ -22,16 +22,16 @@ export class AdminOrdersComponent {
       return o.map(o => {
         const data = o.payload.val();
         data.key = o.key;
-        console.log(data);
+        //console.log(data);
         return data;
       })
     }));
 
     //this.id = this.route.snapshot.paramMap.get('id');
 
-    this.id = this.orderService.getOrders().snapshotChanges().forEach(order => {
-      //console.log(order[0]);
-    })
+    //this.id = this.orderService.getOrders().snapshotChanges().forEach(order => {
+    //console.log(order[0]);
+    //})
 
   }
 

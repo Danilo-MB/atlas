@@ -13,7 +13,7 @@
       <tr *ngFor="let order of orders$ | async">
         <td>{{ order.shipping.name }}</td>
         <td>{{ order.datePlaced | date}}</td>
-        <td></td>
+        <td>{{ order.key }}</td>
         <td>
           <a [routerLink]="['/admin/pedido/' , order.key]" routerLinkActive="router-link-active">Ver</a>
         </td>
