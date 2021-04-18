@@ -13,6 +13,7 @@ import { fade } from '../animations/animations';
 })
 export class ShoppingCartComponent implements OnInit {
   cart$;
+  cart;
 
   constructor(private shoppingCartService: ShoppingCartService) { }
 

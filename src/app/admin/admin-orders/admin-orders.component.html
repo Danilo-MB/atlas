@@ -14,9 +14,9 @@
         <td>{{ order.shipping.name }}</td>
         <td>{{ order.datePlaced | date}}</td>
         <td>{{ order.key }}</td>
-        <td>
+        <th>
           <a [routerLink]="['/admin/pedido/' , order.key]" routerLinkActive="router-link-active">Ver</a>
-        </td>
+        </th>
       </tr>
     </tbody>
   </table>

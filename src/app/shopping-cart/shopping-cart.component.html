@@ -1,59 +1,67 @@
 <body style="margin-top: 20px; margin-left: 20px; margin-left: 20px;">
-    <h1>Shopping Cart</h1>
-    <div class="row col-6" *ngIf="cart$ | async as cart">
-        <p>
-            You have {{ cart.totalItemsCount }} items in your shopping cart.
-            <a *ngIf="cart.items.length" (click)="clearCart()" class="btn btn-outline-light">
+    <div *ngIf="cart$ | async as cart">
+        <h4>Mi compra:</h4>
+        <div class="alert alert-danger col-6" *ngIf="cart.items.length === 0">
+            <p> Aún no ha seleccionado ningún producto para su compra</p>
+            <button routerLink="/products" class="btn btn-secondary">Volver</button>
+        </div>
+        <div class="row col-6" *ngIf="cart.items.length > 0">
+            <p *ngIf="cart.items.length > 0">
+                You have {{ cart.totalItemsCount }} items in your shopping cart.
+                <a *ngIf="cart.items.length > 0" (click)="clearCart()" class="btn btn-outline-light">
 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                    </svg>
+                </a>
+            </p>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th style="width: 230px;" class="text-center">Quantity</th>
+                        <th style="width: 200px;" class="text-rigth">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cart.items" @fade>
+                        <td>
+                            <div [style.backgroundImage]="'url(' +item.product.imageUrl +')'" class="thumbnail" alt="">
+                            </div>
+                        </td>
+                        <td style="vertical-align : middle">{{ item.product.title }}</td>
+                        <td style="vertical-align : middle">
+                            <product-quantity [product]="item.product" [shoppingCart]="cart">
+
+                            </product-quantity>
+                        </td>
+                        <td style="vertical-align : middle" class="text-rigth">{{ item.totalPrice | currency:'USD':true
+                            }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: bold;" class="text-rigth">{{ cart.totalPrice | currency:'USD':true }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">
+                Check Out
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    class="bi bi-cart-check-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
-                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
                 </svg>
             </a>
-        </p>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Product</th>
-                    <th style="width: 230px;" class="text-center">Quantity</th>
-                    <th style="width: 200px;" class="text-rigth">Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of cart.items" @fade>
-                    <td>
-                        <div [style.backgroundImage]="'url(' +item.product.imageUrl +')'" class="thumbnail" alt="">
-                        </div>
-                    </td>
-                    <td style="vertical-align : middle">{{ item.product.title }}</td>
-                    <td style="vertical-align : middle">
-                        <product-quantity [product]="item.product" [shoppingCart]="cart">
-
-                        </product-quantity>
-                    </td>
-                    <td style="vertical-align : middle" class="text-rigth">{{ item.totalPrice | currency:'USD':true }}
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="font-weight: bold;" class="text-rigth">{{ cart.totalPrice | currency:'USD':true }}</td>
-                </tr>
-            </tfoot>
-        </table>
-        <a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">
-            Check Out
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-cart-check-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm.354-7.646a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
-            </svg>
-        </a>
+        </div>
     </div>
 </body>
