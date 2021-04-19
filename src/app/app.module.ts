@@ -1,3 +1,4 @@
+import { ReviewsService } from './reviews.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,6 +39,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewsFormComponent } from './reviews-form/reviews-form.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,8 @@ import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
     AdminOrderComponent,
+    ReviewsComponent,
+    ReviewsFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,12 +79,12 @@ import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
       { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent },
+      { path: 'reviews', component: ReviewsComponent },
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService] },
       { path: 'admin/products/:key', component: ProductFormComponent, canActivate: [AuthGuardService] },
       { path: 'admin/pedidos', component: AdminOrdersComponent, canActivate: [AuthGuardService] },
       { path: 'admin/pedido/:id', component: AdminOrderComponent, canActivate: [AuthGuardService] },
-
     ])
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -95,7 +100,8 @@ import { AdminOrderComponent } from './admin/admin-order/admin-order.component';
     //AngularFirestoreModule //Prueba por bug solucionado
     UserService,
     OrderService,
-    NgxSpinnerService
+    NgxSpinnerService,
+    ReviewsService
   ],
   bootstrap: [AppComponent]
 })

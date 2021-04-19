@@ -1,0 +1,28 @@
+<body style="margin-top: 20px; margin-left: 20px; margin-left: 20px;">
+    <div class="row">
+        <div class="col-6">
+            <reviews-form></reviews-form>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                    <th style="width: 70px;">Cliente</th>
+                    <th>Reseña</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let review of reviews">
+                        <td>
+                            <div class="thumnail">
+                                <img style="width: 50px; border-radius: 100%;" [src]="appUser.image">
+                            </div>
+                        </td>
+                        <td style="font-style: italic;">"{{review.review}}"</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</body>
