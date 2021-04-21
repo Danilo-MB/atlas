@@ -10,18 +10,19 @@
                 <thead>
                     <th style="width: 70px;">Cliente</th>
                     <th>Reseña</th>
+                    <th>Calificación</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let review of reviews">
                         <td>
                             <div class="thumnail">
-                                <img style="width: 50px; border-radius: 100%;" [src]="appUser.image">
+                                <img style="width: 50px; border-radius: 100%;" [src]="review.image">
                             </div>
                         </td>
-                        <td style="font-style: italic;">"{{review.review}}"</td>
+                        <td style="font-style: italic;">"{{review}}"</td>
+                        <td>{{review.rate}}</td>
                     </tr>
                 </tbody>
-
             </table>
         </div>
     </div>

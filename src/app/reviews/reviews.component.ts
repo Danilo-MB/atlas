@@ -1,7 +1,7 @@
 import { ReviewsService } from './../reviews.service';
-import { AppUser } from '../models/app-user';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { Review } from '../models/review';
+
 
 @Component({
   selector: 'app-reviews',
@@ -10,11 +10,10 @@ import { AuthService } from '../auth.service';
 })
 export class ReviewsComponent implements OnInit {
   reviews;
-  appUser: AppUser;
 
-  constructor(private reviewsService: ReviewsService, private auth: AuthService) {
 
-    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+  constructor(private reviewsService: ReviewsService) {
+
     this.reviewsService.get().subscribe(r => this.reviews = r);
 
   }

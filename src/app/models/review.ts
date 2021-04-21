@@ -1,6 +1,8 @@
-import { AppUser } from './app-user';
 
-export interface Review {
-    content: string;
-    user: AppUser
+export class Review {
+    reviewText: string;
+    date: number;
+    user: string;
+    image: string;
+    rate: number;
 }

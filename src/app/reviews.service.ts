@@ -1,3 +1,5 @@
+import { AuthService } from './auth.service';
+import { Review } from './models/review';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -7,9 +9,9 @@ import { map } from 'rxjs/operators';
 })
 export class ReviewsService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private auth: AuthService) { }
 
-  create(review) {
+  create(review: Review) {
     this.db.list('/reviews').push(review);
   }
 

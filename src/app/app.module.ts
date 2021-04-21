@@ -79,7 +79,7 @@ import { ReviewsFormComponent } from './reviews-form/reviews-form.component';
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService] },
       { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent },
-      { path: 'reviews', component: ReviewsComponent },
+      { path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuardService] },
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService] },
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService] },
       { path: 'admin/products/:key', component: ProductFormComponent, canActivate: [AuthGuardService] },
