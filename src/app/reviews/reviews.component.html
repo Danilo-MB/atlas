@@ -1,16 +1,18 @@
 <body style="margin-top: 20px; margin-left: 20px; margin-left: 20px;">
-    <div class="row">
-        <div class="col-6">
+    <div class="row container-fluid">
+        <div class="col-sm-6">
             <reviews-form></reviews-form>
         </div>
     </div>
+    <h6 style="margin-top: 20px;">Reseñas anteriores:</h6>
     <div class="row" style="margin-top: 20px;">
-        <div class="col-6">
+        <div class="col-sm-6">
             <table class="table">
                 <thead>
                     <th style="width: 70px;">Cliente</th>
+                    <th style="width: 100px;">Fecha</th>
                     <th>Reseña</th>
-                    <th>Calificación</th>
+                    <th style="width: 100px;">Calificación</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let review of reviews">
@@ -19,8 +21,9 @@
                                 <img style="width: 50px; border-radius: 100%;" [src]="review.image">
                             </div>
                         </td>
-                        <td style="font-style: italic;">"{{review}}"</td>
-                        <td>{{review.rate}}</td>
+                        <td>{{review.date | date}}</td>
+                        <td style="font-style: italic;">"{{review.reviewText.review}}"</td>
+                        <td>{{review.rate | number: '1.1-1'}}</td>
                     </tr>
                 </tbody>
             </table>

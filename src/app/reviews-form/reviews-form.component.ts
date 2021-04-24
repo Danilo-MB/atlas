@@ -12,9 +12,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ReviewsFormComponent implements OnInit {
   user: string;
   userImage: string;
-  @Input() rate: number;
+  rate: number;
 
-  constructor(private reviewsService: ReviewsService, private authService: AuthService) { }
+  constructor(private reviewsService: ReviewsService, private authService: AuthService, private router: Router) { }
 
   save(text: string) {
     let review: Review = {
@@ -25,6 +25,9 @@ export class ReviewsFormComponent implements OnInit {
       rate: this.rate
     }
     this.reviewsService.create(review);
+    window.alert("Gracias por enviarnos su opinión!");
+    this.router.navigate(['/']);
+
   }
 
   setRate(rate: number) {
