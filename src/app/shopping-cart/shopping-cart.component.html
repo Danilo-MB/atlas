@@ -7,7 +7,7 @@
         </div>
         <div class="row col-6" *ngIf="cart.items.length > 0">
             <p *ngIf="cart.items.length > 0">
-                You have {{ cart.totalItemsCount }} items in your shopping cart.
+                Productos en su carrito: {{ cart.totalItemsCount }}
                 <a *ngIf="cart.items.length > 0" (click)="clearCart()" class="btn btn-outline-light">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -39,8 +39,8 @@
 
                             </product-quantity>
                         </td>
-                        <td style="vertical-align : middle" class="text-rigth">{{ item.totalPrice | currency:'USD':true
-                            }}
+                        <td style="vertical-align : middle" class="text-rigth">
+                            {{ item.totalPrice | currency:'USD':true }}
                         </td>
                     </tr>
                 </tbody>

@@ -1,23 +1,25 @@
 <body style="margin-top: 20px; margin-left: 20px; margin-left: 20px;">
-  <h4>Pedidos</h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Cliente</th>
-        <th>Fecha</th>
-        <th>ID</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders$ | async">
-        <td>{{ order.shipping.name }}</td>
-        <td>{{ order.datePlaced | date}}</td>
-        <td>{{ order.key }}</td>
-        <th>
-          <a [routerLink]="['/admin/pedido/' , order.key]" routerLinkActive="router-link-active">Ver</a>
-        </th>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row container">
+    <div class="col-sm-10">
+      <h4>Pedidos</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders$ | async">
+            <td>{{ order.shipping.name }}</td>
+            <td>{{ order.datePlaced | date}}</td>
+            <th>
+              <a [routerLink]="['/admin/pedido/' , order.key]" routerLinkActive="router-link-active">Ver</a>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </body>
